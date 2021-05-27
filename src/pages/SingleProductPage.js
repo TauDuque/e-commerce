@@ -18,7 +18,7 @@ const SingleProductPage = () => {
   const { id } = useParams();
   const history = useHistory();
   const {
-    single_poduct_loading: loading,
+    single_product_loading: loading,
     single_product_error: error,
     single_product: product,
     fetchSingleProduct,
@@ -80,7 +80,7 @@ const SingleProductPage = () => {
               {company}
             </p>
             <hr />
-            {stock > 0 && <AddToCart />}
+            {stock > 0 && <AddToCart product={product} />}
           </section>
         </div>
       </div>
