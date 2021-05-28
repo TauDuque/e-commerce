@@ -20,6 +20,11 @@ const Filters = () => {
     clearFilters,
     all_products,
   } = useFilterContext();
+
+  const categories = getUniqueValues(all_products, "category");
+  const companies = getUniqueValues(all_products, "company");
+  const colors = getUniqueValues(all_products, "colors");
+
   return (
     <Wrapper>
       <div className="content">
@@ -35,6 +40,84 @@ const Filters = () => {
               onChange={updateFilters}
             />
           </div>
+          {/* final input */}
+          {/* botões de categorias */}
+          <div className="form-control">
+            <h5>category</h5>
+            <div>
+              {categories.map((cat, index) => {
+                return (
+                  <button
+                    key={index}
+                    onClick={updateFilters}
+                    name="category"
+                    type="button"
+                    className={`${
+                      category === cat.toLowerCase() ? "active" : null
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {/* final botões de categorias */}
+          {/* select de companies */}
+          <h5>company</h5>
+          <select
+            name="company"
+            value={company}
+            onChange={updateFilters}
+            className="company"
+          >
+            {companies.map((comp, index) => {
+              return (
+                <option value={comp} key={index}>
+                  {comp}
+                </option>
+              );
+            })}
+          </select>
+          {/* final select de companies */}
+          {/* botões de cores */}
+          <div className="form-control">
+            <h5>Colors</h5>
+            <div className="colors">
+              {colors.map((cor, index) => {
+                if (cor === "all") {
+                  return (
+                    <button
+                      key={index}
+                      name="color"
+                      onClick={updateFilters}
+                      data-clr="all"
+                      className={`${
+                        color === "all" ? "all-btn active" : "all-btn"
+                      }`}
+                    >
+                      all
+                    </button>
+                  );
+                }
+                return (
+                  <button
+                    key={index}
+                    name="color"
+                    style={{ background: cor }}
+                    className={`${
+                      color === cor ? "color-btn active" : "color-btn"
+                    }`}
+                    data-clr={cor}
+                    onClick={updateFilters}
+                  >
+                    {color === cor ? <FaCheck /> : null}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {/* final botões de cores  */}
         </form>
       </div>
     </Wrapper>
