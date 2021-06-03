@@ -64,34 +64,38 @@ const Filters = () => {
           </div>
           {/* final botões de categorias */}
           {/* select de companies */}
-          <h5>company</h5>
-          <select
-            name="company"
-            value={company}
-            onChange={updateFilters}
-            className="company"
-          >
-            {companies.map((comp, index) => {
-              return (
-                <option value={comp} key={index}>
-                  {comp}
-                </option>
-              );
-            })}
-          </select>
+          <div className="form-control">
+            <h5>company</h5>
+            <select
+              name="company"
+              value={company}
+              onChange={updateFilters}
+              className="company"
+            >
+              {companies.map((comp, index) => {
+                return (
+                  <option value={comp} key={index}>
+                    {comp}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           {/* final select de companies */}
           {/* botões de cores */}
           <div className="form-control">
             <h5>Colors</h5>
             <div className="colors">
               {colors.map((cor, index) => {
+                console.log(colors, cor);
                 if (cor === "all") {
                   return (
                     <button
                       key={index}
                       name="color"
+                      type="button"
                       onClick={updateFilters}
-                      data-clr="all"
+                      data-color="all"
                       className={`${
                         color === "all" ? "all-btn active" : "all-btn"
                       }`}
@@ -104,11 +108,12 @@ const Filters = () => {
                   <button
                     key={index}
                     name="color"
+                    type="button"
                     style={{ background: cor }}
                     className={`${
                       color === cor ? "color-btn active" : "color-btn"
                     }`}
-                    data-clr={cor}
+                    data-color={cor}
                     onClick={updateFilters}
                   >
                     {color === cor ? <FaCheck /> : null}
@@ -118,7 +123,36 @@ const Filters = () => {
             </div>
           </div>
           {/* final botões de cores  */}
+          {/* range de preço */}
+          <div className="form-control">
+            <h5>Price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
+              type="range"
+              name="price"
+              min={min_price}
+              max={max_price}
+              onChange={updateFilters}
+              value={price}
+            />
+          </div>
+          {/* fim de  preço */}
+          {/* shipping */}
+          <div className="form-control shipping">
+            <label htmlFor="shipping">free shipping</label>
+            <input
+              type="checkbox"
+              name="shipping"
+              id="shipping"
+              onChange={updateFilters}
+              checked={shipping}
+            />
+          </div>
+          {/* fim shipping */}
         </form>
+        <button type="button" className="clear-btn" onClick={clearFilters}>
+          clear filters
+        </button>
       </div>
     </Wrapper>
   );
@@ -185,6 +219,7 @@ const Wrapper = styled.section`
       color: var(--clr-white);
     }
   }
+
   .all-btn {
     display: flex;
     align-items: center;
