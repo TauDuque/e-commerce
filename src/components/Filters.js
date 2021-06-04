@@ -87,7 +87,6 @@ const Filters = () => {
             <h5>Colors</h5>
             <div className="colors">
               {colors.map((cor, index) => {
-                console.log(colors, cor);
                 if (cor === "all") {
                   return (
                     <button
