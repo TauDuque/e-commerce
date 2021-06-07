@@ -24,7 +24,6 @@ const CartContent = () => {
           className="link-btn clear-btn"
           onClick={clearCart}
         >
-          {" "}
           clear shopping cart
         </button>
       </div>

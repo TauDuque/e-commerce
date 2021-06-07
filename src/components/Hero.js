@@ -22,7 +22,7 @@ const Hero = () => {
         </Link>
       </article>
       <article className="img-container">
-        <img src={heroBcg} alt="nice table" className="main-img" />
+        <img src={heroBcg} alt="nice table" className="main-img grow" />
         <img src={heroBcg2} alt="person working" className="accent-img" />
       </article>
     </Wrapper>
@@ -69,6 +69,12 @@ const Wrapper = styled.section`
       border-radius: var(--radius);
       display: block;
       object-fit: cover;
+    }
+    .grow {
+      transition: all 0.2s ease-in-out;
+    }
+    .grow:hover {
+      transform: scale(1.1);
     }
     .accent-img {
       position: absolute;
